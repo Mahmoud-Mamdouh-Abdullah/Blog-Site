@@ -1,0 +1,42 @@
+.main-container {
+    padding-top: 120px;
+    padding-bottom: 100px;
+}
+
+.main-div {
+    width: 40%;
+}
+.footer {
+    margin: 0;
+}
+
+#sign-up, #login{
+    color: white;
+    margin-left: 15px;
+    width: 40%;
+}
+
+#h2{
+    font-family: 'Fira Sans', sans-serif ;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f48840;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d37231;
+  }
+
