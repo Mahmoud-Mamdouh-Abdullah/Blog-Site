@@ -31,7 +31,7 @@ function getRow($sql, $types = null, $vals = null)
     $results = getRows($sql, $types, $vals);
     if (count($results) > 0)
         return $results[0];
-    return null;
+    return 0;
 }
 
 function addData($sql, $types, $vals)

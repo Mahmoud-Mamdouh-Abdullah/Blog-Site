@@ -1,6 +1,7 @@
 "use strict";
 let apiUrl = "api";
-let likePost = async (id) => {
+
+const likePost = async (id) => {
   document
     .querySelector(`#likes_btn_${id}`)
     .setAttribute("disabled", "disabled");
@@ -20,7 +21,7 @@ let likePost = async (id) => {
   }
 };
 
-let unLikePost = async (id) => {
+const unLikePost = async (id) => {
   document
     .querySelector(`#unlikes_btn_${id}`)
     .setAttribute("disabled", "disabled");

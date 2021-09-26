@@ -1,18 +1,24 @@
 <div class="blog-post">
     <div class="blog-thumb">
-        <img src="<?= BASE_URL . '/post_images/' . $post['image'] ?>" alt="">
+        <img src="<?php
+                    if (strlen($post['image']) != 0) {
+                    echo BASE_URL . '/post_images/' . $post['image'];
+                    } else {
+                     echo BASE_URL . 'assets/images/blog-post-01.jpg'; 
+                    }
+                        ?>" alt="">
     </div>
     <div class="down-content">
         <span><?= $post['category_name'] ?></span>
-        <a href="<?= BASE_URL . '/post-details.php?id=' . $post['id'] ?>">
+        <a href="<?= BASE_URL . 'post-details/post-details.php?id=' . $post['id'] ?>">
             <h4><?= $post['title'] ?></h4>
         </a>
         <ul class="post-info">
-            <li><a href="#"><?= $post['username'] ?></a></li>
+            <li><a href="<?= BASE_URL . 'user/user-details.php?user_id=' . $post['user_id'] ?>"><?= $post['username'] ?></a></li>
             <li><a href="#"><?= $post['publish_date'] ?></a></li>
             <li><a href="#"><?= $post['number_of_comment'] ?> Comments</a></li>
         </ul>
-        <p><?= $post['content'] ?></p>
+        <p><?= (strlen($post['content']) <= 500) ? $post['content'] : (mb_substr($post['content'], 0, 500, 'UTF-8') . '...<a href="' . BASE_URL . 'post-details/post-details.php?id=' . $post['id'] . '">read more.</a>')?></p>
         <?php
         if ($post['tags']) {
         ?>

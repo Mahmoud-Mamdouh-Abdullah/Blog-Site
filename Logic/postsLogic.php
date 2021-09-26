@@ -111,6 +111,30 @@ function getLikesCount($postId)
     return $result['cnt'];
 }
 
+function getPostComments($post_id)
+{
+    $sql = "SELECT c.*, u.name FROM comments c
+    JOIN users u ON u.id = c.user_id
+    WHERE post_id = ?;";
+    $comments = getRows($sql, 'i', [$post_id]);
+    for ($i = 0; $i < count($comments); $i++) {
+        $comments[$i]['likes_count'] = getCommentsLikesCount($comments[$i]['id']);
+        $comments[$i]['likes'] = getCommentLikes($comments[$i]['id']);
+    }
+    return $comments;
+}
+
+function getCommentsLikesCount($comment_id)
+{
+    $sql = "SELECT COUNT(0) as likes_count FROM comment_likes WHERE comment_id = ?;";
+    return getRow($sql, 'i', [$comment_id])['likes_count'];
+}
+
+function getCommentLikes($comment_id)
+{
+    $sql = "SELECT user_id as liked_by FROM comment_likes WHERE comment_id = ?;";
+    return getRows($sql, 'i', [$comment_id]);
+}
 
 function getPostTags($post_id)
 {
@@ -124,10 +148,15 @@ function getPostTags($post_id)
 
 function getPostByID($post_id)
 {
-    $sql = "SELECT * FROM posts WHERE id=?";
+    $sql = "SELECT p.*, u.name as username, c.name as category_name FROM posts p 
+    JOIN categories c ON c.id = p.category_id
+    JOIN users u ON u.id = p.user_id
+    WHERE p.id=?;";
     $post = getRow($sql, 'i', [$post_id]);
     $sql = "SELECT * FROM post_tags WHERE post_id=?";
-    $post['tags'] = getRows($sql, 'i', [$post_id]);
+    $post['tags'] = getPostTags($post_id);
+    $post['comment_count'] = getPostCommentsCount($post_id);
+    $post['comments'] = getPostComments($post_id);
     return $post;
 }
 
@@ -227,4 +256,26 @@ function unlikePost($id, $user_id)
 {
     $sql = "DELETE FROM likes WHERE post_id=? AND user_id=?";
     execute($sql, 'ii', [$id, $user_id]);
+}
+
+function addComment($post_id, $user_id, $message)
+{
+    $sql = "INSERT INTO comments (comment, post_id, user_id) VALUES (?,?,?);";
+    return editData($sql, 'sii', [$message, $post_id, $user_id]);
+}
+
+function deleteComment($comment_id)
+{
+    $sql = "DELETE FROM comments WHERE id = ?;";
+    deleteData($sql, 'i', [$comment_id]);
+}
+
+function likeComment($comment_id, $user_id) {
+    $sql = "INSERT INTO comment_likes (comment_id, user_id) VALUES (?,?);";
+    return editData($sql, 'ii', [$comment_id, $user_id]);
+}
+
+function unlikeComment($comment_id, $user_id) {
+    $sql = "DELETE FROM comment_likes WHERE comment_id =? AND user_id = ?;";
+    deleteData($sql, 'ii', [$comment_id, $user_id]);
 }

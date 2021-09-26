@@ -2,6 +2,18 @@
 require_once('../config.php');
 require_once(BASE_PATH . '/logic/postsLogic.php');
 require_once(BASE_PATH . '/layout/header.php');
+
+if(!isAdmin()) {
+    header('Location:'. BASE_PATH . 'index.php');
+}
+
+function isAdmin()
+{
+    if (session_status() != PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+    return (isset($_SESSION['user']) && $_SESSION['user']['type'] == 1);
+}
 ?>
 
 <!-- Page Content -->

@@ -1,10 +1,11 @@
 <?php
 if (session_status() != PHP_SESSION_ACTIVE)
     session_start();
-$current_page = 'home';
+$current_page = 'none';
 if (str_contains($_SERVER['REQUEST_URI'], '/posts.php')) $current_page = 'posts';
 if (str_contains($_SERVER['REQUEST_URI'], '/myposts')) $current_page = 'myposts';
 if (str_contains($_SERVER['REQUEST_URI'], '/admin')) $current_page = 'admin';
+if (str_contains($_SERVER['REQUEST_URI'], 'contact')) $current_page = 'contact';
 
 ?>
 <!DOCTYPE html>
@@ -71,7 +72,7 @@ https://templatemo.com/tm-551-stand-blog
                             <a class="nav-link <?= ($current_page == 'posts' ? 'active' : '') ?>" href="<?= BASE_URL . 'posts.php'?>">Posts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact Us</a>
+                            <a class="nav-link <?= ($current_page == 'contact' ? 'active' : '') ?>" href="<?= BASE_URL . 'contact.php'?>">Contact Us</a>
                         </li>
                         <?php
                         if (isset($_SESSION['user'])) {

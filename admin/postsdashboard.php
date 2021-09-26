@@ -7,6 +7,7 @@ $page_size = 10;
 $order_field = isset($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'id';
 $order_by = isset($_REQUEST['order_by']) ? $_REQUEST['order_by'] : 'asc';
 $q = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+
 function getUrl($page, $q, $order_field, $order_by)
 {
     return "admin.php?page=$page&q=$q&order_field=$order_field&order_by=$order_by";
@@ -39,7 +40,7 @@ function getUserId()
     return 0;
 }
 
-$posts = getMyPosts($page_size, $page, getUserId(), $q, $order_field, $order_by);
+$posts = getMyPosts($page_size, $page, null, $q, $order_field, $order_by);
 $page_count = ceil($posts['count'] / $page_size);
 /*
 $posts = ['data'=>[],'count'=>100,'order_field'=>'title','order_by'=>'asc']

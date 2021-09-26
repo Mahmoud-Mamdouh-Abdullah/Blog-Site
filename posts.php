@@ -8,7 +8,7 @@ $tag_id = isset($_REQUEST['tag_id']) ? $_REQUEST['tag_id'] : null;
 $q = isset($_REQUEST['q']) ? $_REQUEST['q'] : null;
 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
 $page_size = 6;
-$posts = $posts = getPosts($page_size, $page, $category_id, $tag_id, null, $q, 'publish_date', 'desc', getUserId());
+$posts = getPosts($page_size, $page, $category_id, $tag_id, null, $q, 'publish_date', 'desc', getUserId());
 $posts_count = getPostCount($category_id, $tag_id, null, $q);
 $page_count = ceil($posts_count / $page_size);
 

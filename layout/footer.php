@@ -38,6 +38,7 @@
     }
   </script>
   <script src="<?= BASE_URL ?>assets/js/post.js"></script>
+  <script src="<?= BASE_URL . 'assets/js/comment.js'?>"></script>
 </body>
 
 </html>

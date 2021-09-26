@@ -1,6 +1,6 @@
 <?php
 require_once('./config.php');
-require_once(BASE_PATH . '/Logic/auth.php');
+require_once(BASE_PATH . '/logic/auth.php');
 
 if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
     $state = tryLogin($_REQUEST['username'], $_REQUEST['password']);
