@@ -1,8 +1,8 @@
 <div class="blog-post">
     <div class="blog-thumb">
-        <img src="<?php
+        <img width="500px" height="400px" src="<?php
                     if (strlen($post['image']) != 0) {
-                    echo BASE_URL . '/post_images/' . $post['image'];
+                    echo $post['image'];
                     } else {
                      echo BASE_URL . 'assets/images/blog-post-01.jpg'; 
                     }
@@ -18,7 +18,7 @@
             <li><a href="#"><?= $post['publish_date'] ?></a></li>
             <li><a href="#"><?= $post['number_of_comment'] ?> Comments</a></li>
         </ul>
-        <p><?= (strlen($post['content']) <= 500) ? $post['content'] : (mb_substr($post['content'], 0, 500, 'UTF-8') . '...<a href="' . BASE_URL . 'post-details/post-details.php?id=' . $post['id'] . '">read more.</a>')?></p>
+        <p><?= (strlen($post['content']) <= 300) ? $post['content'] : (mb_substr($post['content'], 0, 300, 'UTF-8') . '...<a href="' . BASE_URL . 'post-details/post-details.php?id=' . $post['id'] . '">read more.</a>')?></p>
         <?php
         if ($post['tags']) {
         ?>

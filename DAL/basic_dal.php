@@ -1,7 +1,7 @@
 <?php
 function getConnection()
 {
-    return new mysqli('localhost', 'root', '', 'blog');
+    return new mysqli('localhost', 'root', '', 'id17634079_blog');
 }
 
 function getRows($sql, $types = null, $vals = null)

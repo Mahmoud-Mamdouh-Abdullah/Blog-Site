@@ -1,6 +1,7 @@
 <?php
-require_once('./config.php');
+require_once('config.php');
 require_once('layout/header.php'); 
+require_once('helpers/createpost.php');
 require_once(BASE_PATH . '/logic/categories.php');
 require_once(BASE_PATH . '/logic/tags.php');
 require_once(BASE_PATH . '/logic/postsLogic.php');
